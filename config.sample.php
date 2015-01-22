@@ -6,13 +6,13 @@ $mysql_pass   = "password";
 $exclude_dbs  = array("information_schema", "mysql", "performance_schema");
 $mysqldump    = '/usr/bin/mysqldump';
 $backup_dir   = '/backup/mysql';
-$compress_cmd = "gzip :file_name :archive_name.gz"; // Set to empty string to disable compression
+$compress_cmd = "gzip :file_name"; // Set to empty string to disable compression
 
 $dry_run = false; // Just list databases to be backed up
 
 /**
  * 1. Set enabled => true in order to enable it
- * 2. Test it to see if it doesn't delete something else by accident
+ * 2. Test it to make sure that it doesn't delete something else by accident
  * 3. Set dry_run => false in order to actually enable it
  */
 $rotate_conf = array(

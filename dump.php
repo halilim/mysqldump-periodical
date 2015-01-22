@@ -41,9 +41,7 @@ foreach ($dbs as $db_name) {
         if (!empty($compress_cmd)) {
             echo "--> Compressing $db_name" . PHP_EOL;
 
-            $compress_result = system(
-                strtr($compress_cmd, array(":archive_name" => $sql_file, ":file_name" => $sql_file))
-            );
+            $compress_result = system(strtr($compress_cmd, ":file_name", $sql_file));
 
             if ($compress_result !== false && file_exists($sql_file)) {
                 unlink($sql_file);
@@ -80,9 +78,9 @@ function rotate(
         throw new InvalidArgumentException("Empty pattern to rotate");
     }
 
-    $last_days_ago = strtotime("-" . $last_days . " days");
+    $last_days_ago = strtotime("-$last_days days");
 
-    $max_days_ago = strtotime("-" . $max_days . " days");
+    $max_days_ago = strtotime("-$max_days days");
 
     foreach (glob($pattern) as $v) {
         $m_time = filemtime($v);
